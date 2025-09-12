@@ -31,11 +31,12 @@ LETTER_POOL = {
 
 def draw_letters():
     all_letters = []
+    hand = []
+
     for letter, count in LETTER_POOL.items():
         for _ in range(0, count):
             all_letters.append(letter)
 
-    hand = []
     for _ in range(10):
         index = randint(0, len(all_letters) - 1)
         hand.append(all_letters[index])
@@ -43,7 +44,18 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
-    pass
+    bank_copy = letter_bank[:]
+
+    if len(word) > len(letter_bank):
+        return False
+    
+    for letter in word.upper():
+        if letter in bank_copy:
+            bank_copy.remove(letter)
+        else:
+            return False
+    return True
+
 
 def score_word(word):
     pass
